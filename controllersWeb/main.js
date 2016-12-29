@@ -6,7 +6,7 @@ const Item = require('../models/category');
 exports.categories = function(req, res, next) {
   Category.find({}, function(err, categories) {
     if (categories) {
-      res.send(categories);
+      res.render('main/home', { categories: categories });
     } else {
       res.send({ message: "Error looking for categories, Try again later" });
     }
@@ -14,23 +14,12 @@ exports.categories = function(req, res, next) {
 }
 
 // Each item URL
-exports.itemsForCategory = function(req, res, next) {
+exports.itemsPage = function(req, res, next) {
   Item.find({ category: req.params.name }, function(err, items) {
     if (items) {
-      res.send(items);
+      res.render('main/item', { items: items });
     } else {
       res.send({ message: "Couldn't find items that you are looking for"});
-    }
-  });
-}
-
-// Search mechanism
-exports.search = function(req, res, next) {
-  Item.find({ name: req.params.name }, function(err, items) {
-    if (err) {
-      res.send("Error");
-    } else {
-      res.send(items);
     }
   });
 }
