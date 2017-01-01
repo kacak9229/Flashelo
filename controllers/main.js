@@ -32,5 +32,24 @@ exports.search = function(req, res, next) {
     } else {
       res.send(items);
     }
-  });
+  });s
+}
+
+// Post a photo to the database, will be to S3
+exports.postPhoto = function(req, res, next) {
+
+  // S3 stuffs
+  const item = new Item();
+  item.name = req.body.name;
+  item.owner = req.user._id;
+  item.price = req.body.price;
+  // item.photo = Still need to figure out on the frontend part. Do i save it as files or something else?
+
+  owner: { type: Schema.Types.ObjectID, ref: 'User'},
+  name: { type: String, unique: true },
+  price: { type: Number },
+  time
+
+
+
 }
